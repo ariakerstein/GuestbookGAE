@@ -47,7 +47,6 @@ class Greeting(ndb.Model):
     title = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
-
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
@@ -55,7 +54,7 @@ class MainPage(webapp2.RequestHandler):
                                           DEFAULT_GUESTBOOK_NAME)
         greetings_query = Greeting.query(
             ancestor=guestbook_key(guestbook_name)).order(-Greeting.date)
-        greetings = greetings_query.fetch(10)
+        greetings = greetings_query.fetch(50)
 
         user = users.get_current_user()
         if user:
